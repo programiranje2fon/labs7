@@ -1,6 +1,5 @@
 package test;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -11,36 +10,27 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import test.task1.GarageTest;
+import test.task1.ParkingSpaceTest;
+import test.task1.VehicleTest;
+import test.task2.ConsumerBasketTest;
+import test.task2.FoodItemTest;
+
+
 /**
  * This class executes all tests and prints out the report.
  * 
  */
 public class RunTests {
-	
+
 	public static void main(String[] args) {
-		runAllTests();
+		runTestsForClass(VehicleTest.class);
+		runTestsForClass(ParkingSpaceTest.class);
+		runTestsForClass(GarageTest.class);
+		runTestsForClass(FoodItemTest.class);
+		runTestsForClass(ConsumerBasketTest.class);
 	}
 
-	/**
-	 * Runs all tests classes (supposes they have a suffix "Test") from the base
-	 * package and its sub-packages. The default value for the basePackage is
-	 * the package where this class is located.
-	 * 
-	 */
-	public static void runAllTests() {
-		try {
-			Class<?>[] classes = TestUtil.getClasses(RunTests.class.getPackage().getName());
-
-			for (Class<?> clazz : classes) {
-				if (clazz.getName().endsWith("Test")) {
-					runTestsForClass(clazz);
-				}
-			}
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * Runs all tests declared in the class c.
 	 * 
@@ -110,8 +100,7 @@ public class RunTests {
 						}
 					}
 
-					// if for a given TestTypes instance there are no tests, do
-					// not add it
+					// if for a given TestTypes instance there are no tests, do not add it
 					if (!methodStatsMap.isEmpty())
 						testTypeMethodMap.put(testType, methodStatsMap);
 				}
@@ -126,8 +115,7 @@ public class RunTests {
 						for (String methodName : methodsMap.keySet()) {
 							int[] methodStats = methodsMap.get(methodName);
 
-							System.err.printf("\t %-20s %s/%s %s%n", methodName, methodStats[0],
-									methodStats[0] + methodStats[1], methodStats[1] == 0 ? "OK" : "Neuspesno");
+							System.err.printf("\t %-20s %s%n", methodName, methodStats[1] == 0 ? "OK" : "Neuspešno: " + methodStats[1]);
 						}
 						System.err.println();
 					}
