@@ -22,5 +22,9 @@ public class Vehicle {
 		
 		return this.regNum.equals(v1.regNum);
 	}
+	
+	public String toString() {
+		return "Registration number: " + regNum;
+	}
 
 }

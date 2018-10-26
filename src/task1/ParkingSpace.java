@@ -20,5 +20,14 @@ public class ParkingSpace {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+	
+	public String toString() {
+		if (free) {
+			return "FREE";
+		} else {
+			return "OCCUPIED, " + vehicle.toString();
+		}
+	}
+
 
 }

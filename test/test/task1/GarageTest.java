@@ -164,4 +164,26 @@ public class GarageTest {
 		
 		assertTrue("U slucaju da se pozove metoda sa prosledjenim vozilom sa registracijom koju vec poseduje vozilo koje je na parkingu, to vozilo se ne izbaci iz niza", !Arrays.stream(mestaValue).anyMatch(m -> m.getVehicle() != null && m.getVehicle().equals(v3)));
 	}
+	
+	@Test
+	public void metoda_ispisi() {
+		Vehicle v1 = new Vehicle();
+		v1.setRegNum("AB123XY");
+		instance.parkTheVehicle(v1);
+		
+		Garage g1 = new Garage(1);
+		g1.parkTheVehicle(v1);
+		instance.print();
+ 		String ocekivaniIspis =
+				"1. OCCUPIED, Registration number: AB123XY" + System.lineSeparator() +
+				"2. FREE" + System.lineSeparator() +
+				"3. FREE" + System.lineSeparator() +
+				"4. FREE" + System.lineSeparator() +
+				"5. FREE";
+		
+		ocekivaniIspis = ocekivaniIspis.replaceAll("\\s","");
+		String ispis = outContent.toString().replaceAll("\\s","");
+		
+		assertTrue("Metoda ne ispisuje dobro sve podatke o parking mestima", ispis.equalsIgnoreCase(ocekivaniIspis));
+	}
 }

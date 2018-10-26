@@ -25,6 +25,12 @@ public class Garage {
 			System.out.println("ERROR");
 		}
 	}
+	
+	public void print() {
+		for (int i = 0; i < parkingSpaces.length; i++) {
+			System.out.println((i+1) + ". " + parkingSpaces[i].toString());
+		}
+	}
 
 	public boolean anyFreeSpace() {
 		for (ParkingSpace parkingSpace : parkingSpaces) {

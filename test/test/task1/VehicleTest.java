@@ -75,4 +75,10 @@ public class VehicleTest {
 		assertEquals("Metoda equals ne vraca false kada je pozvana nad vozilom sa registracijom \"AA123BB\", a prosledjeno je vozilo sa registarskim brojem \"cc456DD\"", false, v1.equals(v2));
 	}
 	
+	@Test
+	public void metoda_toString() {
+		instance.setRegNum("AA123BB");
+		assertEquals("Metoda toString ne vraca String u odgovarajucem formatu", "Registration number: AA123BB", instance.toString());
+	}
+	
 }

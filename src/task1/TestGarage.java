@@ -10,7 +10,7 @@ public class TestGarage {
 		v2.setRegNum("NS456-CD");
 		
 		
-		Garage g1 = new Garage(20);
+		Garage g1 = new Garage(10);
 		g1.parkTheVehicle(v1);
 		g1.parkTheVehicle(v2);
 		
