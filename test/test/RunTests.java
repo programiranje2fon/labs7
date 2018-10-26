@@ -10,11 +10,11 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import test.task1.GarageTest;
-import test.task1.ParkingSpaceTest;
-import test.task1.VehicleTest;
-import test.task2.ConsumerBasketTest;
-import test.task2.FoodItemTest;
+import task1.GarageTest;
+import task1.ParkingSpaceTest;
+import task1.VehicleTest;
+import task2.ConsumerBasketTest;
+import task2.FoodItemTest;
 
 
 /**
