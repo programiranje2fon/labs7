@@ -27,51 +27,51 @@ public class FoodItemTest {
 	}
 	
 	@Test
-	public void atribut_naziv() {
-		assertTrue("U klasi nije definisan atribut name", TestUtil.doesFieldExist(FoodItem.class, "name"));
+	public void attribute_name() {
+		assertTrue("There is no attribute \"name\" declared", TestUtil.doesFieldExist(FoodItem.class, "name"));
 	}
 	
 	@Test
-	public void atribut_naziv_vidljivost() {
-		assertTrue("Atribut name nije privatan", TestUtil.hasFieldModifier(FoodItem.class, "name", Modifier.PRIVATE));
+	public void attribute_name_visibility() {
+		assertTrue("Attribute \"name\" is not private", TestUtil.hasFieldModifier(FoodItem.class, "name", Modifier.PRIVATE));
 	}
 	
 	@Test
-	public void atribut_cena() {
-		assertTrue("U klasi nije definisan atribut price", TestUtil.doesFieldExist(FoodItem.class, "price"));
+	public void attribute_price() {
+		assertTrue("There is no attribute \"price\" declared", TestUtil.doesFieldExist(FoodItem.class, "price"));
 	}
 	
 	@Test
-	public void atribut_cena_vidljivost() {
-		assertTrue("Atribut price nije privatan", TestUtil.hasFieldModifier(FoodItem.class, "price", Modifier.PRIVATE));
+	public void attribute_price_visibility() {
+		assertTrue("Attribute \"price\" is not private", TestUtil.hasFieldModifier(FoodItem.class, "price", Modifier.PRIVATE));
 	}
 	
 	@Test
-	public void metoda_setNaziv() {
+	public void method_setName() {
 		instance.setName("bread");
 		String nazivValue = (String) TestUtil.getFieldValue(instance, "name");
-		assertEquals("Nakon poziva metode setNaziv(String) sa prosledjenim argumentom \"bread\", vrednost atributa name se nije promenila na tu vrednost", "bread", nazivValue);
+		assertEquals("After passing as argument \"bread\", the attribute \"name\" should have the value \"bread\"", "bread", nazivValue);
 	}
 	
 	@Test
-	public void metoda_getNaziv() {
+	public void method_getName() {
 		String nazivValue = (String) TestUtil.getFieldValue(instance, "name");
 
-		assertEquals("Metoda getNaziv ne vraca vrednost atributa name", nazivValue, instance.getName());
+		assertEquals("The method does not return the value of the attribute \"name\"", nazivValue, instance.getName());
 	}
 	
 	@Test
-	public void metoda_setCena() {
+	public void method_setPrice() {
 		instance.setPrice(50.3);
 		double cenaValue = (double) TestUtil.getFieldValue(instance, "price");
-		assertEquals("Nakon poziva metode setCena(double) sa prosledjenim argumentom \"50.3\", vrednost atributa price se nije promenila na tu vrednost", 50.3, cenaValue, 0.001);
+		assertEquals("After passing as argument \"50.3\", the attribute \"price\" should have the value \"50.3\"", 50.3, cenaValue, 0.001);
 	}
 	
 	@Test
-	public void metoda_getCena() {
+	public void method_getPrice() {
 		double cenaValue = (double) TestUtil.getFieldValue(instance, "price");
 		
-		assertEquals("Metoda getCena ne vraca vrednost atributa price", cenaValue, instance.getPrice(), 0.001);
+		assertEquals("The method does not return the value of the attribute \"price\"", cenaValue, instance.getPrice(), 0.001);
 	}
 	
 }

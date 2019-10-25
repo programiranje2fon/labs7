@@ -42,99 +42,99 @@ public class GarageTest {
 	}
 	
 	@Test
-	public void atribut_mesta() {
-		assertTrue("U klasi nije definisan atribut parkingSpaces", TestUtil.doesFieldExist(Garage.class, "parkingSpaces"));
+	public void attribute_parkingSpaces() {
+		assertTrue("There is no attribute \"parkingSpaces\" declared", TestUtil.doesFieldExist(Garage.class, "parkingSpaces"));
 	}
 	
 	@Test
-	public void atribut_mesta_vidljivost() {
-		assertTrue("Atribut parkingSpaces nije privatan", TestUtil.hasFieldModifier(Garage.class, "parkingSpaces", Modifier.PRIVATE));
+	public void attribute_parkingSpaces_visibility() {
+		assertTrue("Attribute \"parkingSpaces\" is not private", TestUtil.hasFieldModifier(Garage.class, "parkingSpaces", Modifier.PRIVATE));
 	}
 	
 	@Test
-	public void konstruktor_GarazaInt() {
+	public void constructor_Garage() {
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(instance, "parkingSpaces");
 		
-		assertTrue("Za pozvani konstruktor sa argumentom 5, atribut parkingSpaces nije inicijalizovan", mestaValue != null);
-		assertEquals("Za pozvani konstruktor sa argumentom 5, atribut namirnice nije kapaciteta 5, vec "+mestaValue.length, 5, mestaValue.length);
+		assertTrue("When the argument is 5, the attribute \"parkingSpaces\" is not initialized", mestaValue != null);
+		assertEquals("When the argument is 5, the attribute \"parkingSpaces\" does not have length 5, but "+mestaValue.length, 5, mestaValue.length);
 		
 		for (ParkingSpace parkingMesto : mestaValue) {
 			if (parkingMesto == null) {
-				fail("Za pozvani konstruktor sa argumentom 5, nisu inicijalizovani svi elementi atributa parkingSpaces");
+				fail("When the argument is 5, not all elements from the array \"parkingSpaces\" are initialized");
 			} else if (!parkingMesto.isFree()) {
-				fail("Za pozvani konstruktor sa argumentom 5, u nizu parkingSpaces nemaju svi elementi u atributu slobodan vrednost \"true\"");
+				fail("When the argument is 5, not all elements from the array \"parkingSpaces\" has the value of \"true\"");
 			}
 		}
 	}
 	
 	@Test
-	public void konstruktor_GarazaInt_brojMestaManjiOd1() {
+	public void constructor_Garage_spacesLessThan1() {
 		Garage g1 = new Garage(0);
 		
-		assertTrue("NE ispisuje se rec GRESKA u slucaju da je prosledjeno 0 konstruktoru Garaza(int)", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument 0, the method should print ERROR to the output", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 		
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(g1, "parkingSpaces");
 		
-		assertTrue("Za pozvani konstruktor sa argumentom 0, atribut parkingSpaces nije inicijalizovan", mestaValue != null);
-		assertEquals("Za pozvani konstruktor sa argumentom 0, atribut parkingSpaces nema kapacitet 40, vec "+mestaValue.length, 40, mestaValue.length);
+		assertTrue("When the argument is 0, the attribute \"parkingSpaces\" is not initialized", mestaValue != null);
+		assertEquals("When the argument is 0, the attribute \"parkingSpaces\" does not have length 40, but "+mestaValue.length, 40, mestaValue.length);
 		
 		for (ParkingSpace parkingMesto : mestaValue) {
 			if (parkingMesto == null) {
-				fail("Za pozvani konstruktor sa argumentom 0, nisu inicijalizovani svi elementi atributa parkingSpaces");
+				fail("When the argument is 0, not all elements from the array \"parkingSpaces\" are initialized");
 			} else if (!parkingMesto.isFree()) {
-				fail("Za pozvani konstruktor sa argumentom 0, u nizu parkingSpaces nemaju svi elementi u atributu slobodan vrednost \"true\"");
+				fail("When the argument is 0, not all elements from the array \"parkingSpaces\" has the value of \"true\"");
 			}
 		}
 	}
 	
 	@Test
-	public void konstruktor_Garaza() {
+	public void constructor_Garage_spaces1() {
 		ParkingSpace[] mesta = new ParkingSpace[1];
 		
 		Garage g1 = new Garage(mesta);
 		
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(g1, "parkingSpaces");
 		
-		assertTrue("Za pozvani konstruktor Garaza() sa prosledjenim nizom objekata ParkingMesto, atribut parkingSpaces ne sadrzi prosledjeni niz", mesta == mestaValue);
+		assertTrue("When the argument is an array of ParkingSpace instances, the attribute \"parkingSpaces\" does not hold the reference to the same array", mesta == mestaValue);
 	}
 	
 	@Test
-	public void konstruktor_Garaza_null() {
+	public void constructor_Garage_spacessNull() {
 		new Garage(null);
 		
-		assertTrue("NE ispisuje se rec GRESKA u slucaju da je prosledjeno null konstruktoru Garaza()", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test
-	public void metoda_daLiImaSlobodnih_True() {
+	public void method_anyFreeSpace_True() {
 		Garage g1 = new Garage(1);
 		
-		assertEquals("U slucaju kada nije uvedeno nijedno vozilo, metoda ne vraca true", true, g1.anyFreeSpace());
+		assertEquals("When the parking is empty, the method should return \"true\"", true, g1.anyFreeSpace());
 	}
 	
 	@Test
-	public void metoda_daLiImaSlobodnih_False() {
+	public void method_anyFreeSpace_False() {
 		Vehicle v1 = new Vehicle();
 		
 		Garage g1 = new Garage(1);
 		g1.parkTheVehicle(v1);
 		
-		assertEquals("U slucaju kada je uvedeno jedno vozilo, a kapacitet garaze je 1, metoda ne vraca false", false, g1.anyFreeSpace());
+		assertEquals("If the array is full, the method should return \'false\'", false, g1.anyFreeSpace());
 	}
 	
 	@Test
-	public void metoda_uvedi() {
+	public void method_parkTheVehicle() {
 		Vehicle v1 = new Vehicle();
 		v1.setRegNum("AB123XY");
 		instance.parkTheVehicle(v1);
 		
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(instance, "parkingSpaces");
 		
-		assertTrue("Nakon sto se uvede novo vozilo, a u nizu parkingSpaces ima slobodnih mesta, to vozilo se ne nalazi u nizu parkingSpaces", Arrays.stream(mestaValue).anyMatch(m -> m.getVehicle() != null && m.getVehicle() == v1));
+		assertTrue("After parking a car (by calling the method parkTheVehicle(Vehicle)) when there are available spaces in the array, the vehicle cannot be found in the array \"parkingSpaces\"", Arrays.stream(mestaValue).anyMatch(m -> m.getVehicle() != null && m.getVehicle() == v1));
 	}
 	
 	@Test
-	public void metoda_uvedi_nemaMesta() {
+	public void method_parkTheVehicle_noAvailable() {
 		Vehicle v1 = new Vehicle();
 		Vehicle v2 = new Vehicle();
 		
@@ -142,11 +142,11 @@ public class GarageTest {
 		g1.parkTheVehicle(v1);
 		g1.parkTheVehicle(v2);
 		
-		assertTrue("NE ispisuje se poruka THE GARAGE IS FULL u slucaju da je uvedeno novo vozilo u garazu u kojoj nema slobodnih mesta", outContent.toString().trim().equalsIgnoreCase("THE GARAGE IS FULL"));
+		assertTrue("When the array is full, when calling the method parkTheVehicle(Vehicle), the method des not print THE GARAGE IS FULL to the output", outContent.toString().trim().equalsIgnoreCase("THE GARAGE IS FULL"));
 	}
 	
 	@Test
-	public void metoda_izvedi() {
+	public void method_unparkVehicle() {
 		Vehicle v1 = new Vehicle();
 		v1.setRegNum("AB123XY");
 		Vehicle v2 = new Vehicle();
@@ -162,11 +162,11 @@ public class GarageTest {
 		
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(instance, "parkingSpaces");
 		
-		assertTrue("U slucaju da se pozove metoda sa prosledjenim vozilom sa registracijom koju vec poseduje vozilo koje je na parkingu, to vozilo se ne izbaci iz niza", !Arrays.stream(mestaValue).anyMatch(m -> m.getVehicle() != null && m.getVehicle().equals(v3)));
+		assertTrue("When passing as argument a plate number that is already in the array, that car (the array element) is not removed from the \"parkingSpaces\".", !Arrays.stream(mestaValue).anyMatch(m -> m.getVehicle() != null && m.getVehicle().equals(v3)));
 	}
 	
 	@Test
-	public void metoda_ispisi() {
+	public void method_print() {
 		Vehicle v1 = new Vehicle();
 		v1.setRegNum("AB123XY");
 		instance.parkTheVehicle(v1);
@@ -184,6 +184,6 @@ public class GarageTest {
 		ocekivaniIspis = ocekivaniIspis.replaceAll("\\s","");
 		String ispis = outContent.toString().replaceAll("\\s","");
 		
-		assertTrue("Metoda ne ispisuje dobro sve podatke o parking mestima", ispis.equalsIgnoreCase(ocekivaniIspis));
+		assertTrue("The method does not print all parking space attributes", ispis.equalsIgnoreCase(ocekivaniIspis));
 	}
 }

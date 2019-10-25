@@ -27,58 +27,58 @@ public class VehicleTest {
 	}
 	
 	@Test
-	public void atribut_registarskiBroj() {
-		assertTrue("U klasi nije definisan atribut regNum", TestUtil.doesFieldExist(Vehicle.class, "regNum"));
+	public void attribute_regNum() {
+		assertTrue("There is no attribute \"regNum\" declared", TestUtil.doesFieldExist(Vehicle.class, "regNum"));
 	}
 	
 	@Test
-	public void atribut_registarskiBroj_vidljivost() {
-		assertTrue("Atribut regNum nije privatan", TestUtil.hasFieldModifier(Vehicle.class, "regNum", Modifier.PRIVATE));
+	public void attribute_regNum_visibility() {
+		assertTrue("Attribute \"regNum\" is not private", TestUtil.hasFieldModifier(Vehicle.class, "regNum", Modifier.PRIVATE));
 	}
 	
 	@Test
-	public void metoda_setRegistarskiBroj() {
+	public void method_setRegNum() {
 		instance.setRegNum("AA112BB");
 		String registarskiBrojValue = (String) TestUtil.getFieldValue(instance, "regNum");
-		assertEquals("Nakon poziva metode setRegistarskiBroj(String) sa prosledjenim argumentom \"AA112BB\", vrednost atributa regNum se nije promenila na \"AA112BB\"", "AA112BB", registarskiBrojValue);
+		assertEquals("After passing as argument \"AA112BB\", the attribute \"regNum\" should have the value \"regNum\"", "AA112BB", registarskiBrojValue);
 	}
 	
 	@Test
-	public void metoda_getRegistarskiBroj() {
+	public void method_getRegNum() {
 		String registarskiBrojValue = (String) TestUtil.getFieldValue(instance, "regNum");
 
-		assertEquals("Metoda getRegistarskiBroj ne vraca vrednost atributa regNum", registarskiBrojValue, instance.getRegNum());
+		assertEquals("The method does not return the value of the attribute \"regNum\"", registarskiBrojValue, instance.getRegNum());
 	}
 	
 	@Test
-	public void metoda_equals_pogresanTip() {
-		assertEquals("Metoda equals ne vraca false ako je prosledjen objekat koji nije klase Vozilo", false, instance.equals(new Object()));
+	public void method_equals_wrongType() {
+		assertEquals("When an object of a different type is passed, the method should return false", false, instance.equals(new Object()));
 	}
 	
 	@Test
-	public void metoda_equals_isti() {
+	public void method_equals_same() {
 		Vehicle v1 = new Vehicle();
 		v1.setRegNum("AA123BB");
 		Vehicle v2 = new Vehicle();
 		v2.setRegNum("AA123BB");
 		
-		assertEquals("Metoda equals ne vraca true kada je pozvana nad vozilom sa registracijom \"AA123BB\", a prosledjeno je vozilo sa registarskim brojem \"AA123BB\"", true, v1.equals(v2));
+		assertEquals("If the attribute \"regNum\" has the value \"AA123BB\", and the object passed as argument has the same \"regNum\" of \"AA123BB\", the method should return true", true, v1.equals(v2));
 	}
 	
 	@Test
-	public void metoda_equals_razliciti() {
+	public void method_equals_different() {
 		Vehicle v1 = new Vehicle();
 		v1.setRegNum("AA123BB");
 		Vehicle v2 = new Vehicle();
 		v2.setRegNum("cc456DD");
 		
-		assertEquals("Metoda equals ne vraca false kada je pozvana nad vozilom sa registracijom \"AA123BB\", a prosledjeno je vozilo sa registarskim brojem \"cc456DD\"", false, v1.equals(v2));
+		assertEquals("If the attribute \"regNum\" has the value \"AA123BB\", and the object passed as argument has the same \"regNum\" of  \"cc456DD\", the method should return false", false, v1.equals(v2));
 	}
 	
 	@Test
-	public void metoda_toString() {
+	public void method_toString() {
 		instance.setRegNum("AA123BB");
-		assertTrue("Metoda toString ne vraca vrednost atributa registarski broj", instance.toString().contains("AA123BB"));
+		assertTrue("The return value does not contain the value of the \"regNum\" attribute", instance.toString().contains("AA123BB"));
 	}
 	
 }

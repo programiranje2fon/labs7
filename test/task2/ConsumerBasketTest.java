@@ -40,48 +40,48 @@ public class ConsumerBasketTest {
 	}
 	
 	@Test
-	public void atribut_namirnice() {
-		assertTrue("U klasi nije definisan atribut food", TestUtil.doesFieldExist(ConsumerBasket.class, "food"));
+	public void attribute_food() {
+		assertTrue("There is no attribute food declared", TestUtil.doesFieldExist(ConsumerBasket.class, "food"));
 	}
 	
 	@Test
-	public void atribut_namirnicevidljivost() {
-		assertTrue("Atribut food nije privatan", TestUtil.hasFieldModifier(ConsumerBasket.class, "food", Modifier.PRIVATE));
+	public void attribute_food_visibility() {
+		assertTrue("Attribute food is not private", TestUtil.hasFieldModifier(ConsumerBasket.class, "food", Modifier.PRIVATE));
 	}
 	
 	@Test
-	public void konstruktor_PotrosackaKorpa() {
+	public void constructor_ConsumerBasket() {
 		FoodItem[] namirniceValue = (FoodItem[]) TestUtil.getFieldValue(instance, "food");
 		
-		assertTrue("Za pozvani konstruktor sa argumentom 5, atribut food nije inicijalizovan", namirniceValue != null);
-		assertEquals("Za pozvani konstruktor sa argumentom 5, atribut food nije kapaciteta 5, vec "+namirniceValue.length, 5, namirniceValue.length);
+		assertTrue("When passed argument is 5, the array food is not initialized", namirniceValue != null);
+		assertEquals("When passed argument is 5, the length of the array food is not 5", 5, namirniceValue.length);
 	}
 	
 	@Test
-	public void konstruktor_PotrosackaKorpa_kapacitetManjiOd1() {
+	public void constructor_ConsumerBasket_capacityLowerThan1() {
 		ConsumerBasket g1 = new ConsumerBasket(0);
 		
-		assertTrue("NE ispisuje se rec ERROR u slucaju da je prosledjeno 0 konstruktoru PotrosackaKorpa()", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When passed argument is 0, the construcotr should print ERROR to the output", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 		
 		FoodItem[] namirniceValue = (FoodItem[]) TestUtil.getFieldValue(g1, "food");
 		
-		assertTrue("Za pozvani konstruktor sa argumentom 0, atribut food nije inicijalizovan", namirniceValue != null);
-		assertEquals("Za pozvani konstruktor sa argumentom 0, atribut food nema kapacitet 10, vec "+namirniceValue.length, 10, namirniceValue.length);
+		assertTrue("When passed argument is 0, the array food is not initialized", namirniceValue != null);
+		assertEquals("When passed argument is 0, the length of the array food is not 10 (the default value)", 10, namirniceValue.length);
 	}
 	
 	@Test
-	public void metoda_dodajUKorpu_imaMesta() {
+	public void method_addToTheBasket_thereIsAvailableSpace() {
 		FoodItem n1 = new FoodItem();
 		n1.setName("sok");
 		instance.addToTheBasket(n1);
 		
 		FoodItem[] namirniceValue = (FoodItem[]) TestUtil.getFieldValue(instance, "food");
 		
-		assertTrue("Nakon sto se doda nova namirnica u korpu, a u nizu food ima slobodnih mesta, ta namirnica se ne nalazi u nizu food", Arrays.stream(namirniceValue).anyMatch(m -> m == n1));
+		assertTrue("If there is available space in the array food, after calling the method addToTheBasket(FoodItem), the food item is not present in the array food", Arrays.stream(namirniceValue).anyMatch(m -> m == n1));
 	}
 	
 	@Test
-	public void metoda_uvedi_nemaMesta() {
+	public void method_addToTheBasket_noAvailableSpace() {
 		FoodItem n1 = new FoodItem();
 		FoodItem n2 = new FoodItem();
 		
@@ -89,11 +89,11 @@ public class ConsumerBasketTest {
 		pk1.addToTheBasket(n1);
 		pk1.addToTheBasket(n2);
 		
-		assertTrue("NE ispisuje se poruka THE BASKET IS FULL u slucaju da je dodata nova namirnica u korpu u kojoj nema slobodnih mesta", outContent.toString().trim().equalsIgnoreCase("THE BASKET IS FULL"));
+		assertTrue("In case there is no available space in the array food, after calling the method addToTheBasket(FoodItem), the method should print to the output THE BASKET IS FULL", outContent.toString().trim().equalsIgnoreCase("THE BASKET IS FULL"));
 	}
 	
 	@Test
-	public void metoda_izracunajUkupnuCenu() {
+	public void method_totalPrice() {
 		FoodItem n1 = new FoodItem();
 		n1.setPrice(10);
 		FoodItem n2 = new FoodItem();
@@ -105,11 +105,11 @@ public class ConsumerBasketTest {
 		instance.addToTheBasket(n2);
 		instance.addToTheBasket(n3);
 		
-		assertEquals("Kada su u korpu dodate namirnice sa cenama 10, 15 i 20 dinara, metoda ne vraca ukupnu cenu 45", 45, instance.totalPrice(), 0.001);
+		assertEquals("When there are three food items in the food array with the foolowing prices: 10, 15 and 20, the method should return the total price of 45", 45, instance.totalPrice(), 0.001);
 	}
 	
 	@Test
-	public void metoda_pronadjiNajskuplju() {
+	public void method_theMostExpensive() {
 		FoodItem n1 = new FoodItem();
 		n1.setPrice(10);
 		FoodItem n2 = new FoodItem();
@@ -121,6 +121,6 @@ public class ConsumerBasketTest {
 		instance.addToTheBasket(n2);
 		instance.addToTheBasket(n3);
 		
-		assertTrue("Kada su u korpu dodate namirnice sa cenama 10, 15 i 20 dinara, metoda ne vraca kao najskuplju trecu namirnicu", instance.theMostExpensive() == n3);
+		assertTrue("When there are three food items in the food array with the foolowing prices: 10, 15 and 20, the method should return 20 as the most expensive item.", instance.theMostExpensive() == n3);
 	}
 }
