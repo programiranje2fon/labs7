@@ -71,7 +71,7 @@ public class GarageTest {
 	public void constructor_Garage_spacesLessThan1() {
 		Garage g1 = new Garage(0);
 		
-		assertTrue("For the argument 0, the method should print ERROR to the output", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument 0, the method should print ERROR to the output", outContent.toString().toLowerCase().contains("error"));
 		
 		ParkingSpace[] mestaValue = (ParkingSpace[]) TestUtil.getFieldValue(g1, "parkingSpaces");
 		
@@ -102,7 +102,7 @@ public class GarageTest {
 	public void constructor_Garage_spacessNull() {
 		new Garage(null);
 		
-		assertTrue("For the argument NULL, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("error"));
 	}
 	
 	@Test
@@ -142,7 +142,7 @@ public class GarageTest {
 		g1.parkTheVehicle(v1);
 		g1.parkTheVehicle(v2);
 		
-		assertTrue("When the array is full, when calling the method parkTheVehicle(Vehicle), the method des not print THE GARAGE IS FULL to the output", outContent.toString().trim().equalsIgnoreCase("THE GARAGE IS FULL"));
+		assertTrue("When the array is full, when calling the method parkTheVehicle(Vehicle), the method des not print THE GARAGE IS FULL to the output", outContent.toString().toLowerCase().contains("the garage is full"));
 	}
 	
 	@Test
@@ -171,19 +171,20 @@ public class GarageTest {
 		v1.setRegNum("AB123XY");
 		instance.parkTheVehicle(v1);
 		
-		Garage g1 = new Garage(1);
-		g1.parkTheVehicle(v1);
 		instance.print();
- 		String ocekivaniIspis =
-				"1. OCCUPIED, Registration number: AB123XY" + System.lineSeparator() +
-				"2. FREE" + System.lineSeparator() +
-				"3. FREE" + System.lineSeparator() +
-				"4. FREE" + System.lineSeparator() +
-				"5. FREE";
 		
-		ocekivaniIspis = ocekivaniIspis.replaceAll("\\s","");
-		String ispis = outContent.toString().replaceAll("\\s","");
+		String[] linijeIspisa = outContent.toString().split(System.lineSeparator());
 		
-		assertTrue("The method does not print all parking space attributes", ispis.equalsIgnoreCase(ocekivaniIspis));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the first line of the output should contain \"1.\"", linijeIspisa[0].contains("1."));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the first line of the output should contain the word \"OCCUPIED\"", linijeIspisa[0].toLowerCase().contains("occupied"));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the first line of the output should contain the registration number of the vehicle", linijeIspisa[0].contains("AB123XY"));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the second line of the output should contain \"2.\"", linijeIspisa[1].contains("2."));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the second line of the output should contain the word \"FREE\"", linijeIspisa[1].toLowerCase().contains("free"));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the third line of the output should contain \"3.\"", linijeIspisa[2].contains("3."));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the third line of the output should contain the word \"FREE\"", linijeIspisa[3].toLowerCase().contains("free"));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the fourth line of the output should contain \"4.\"", linijeIspisa[3].contains("4."));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the fourth line of the output should contain the word \"FREE\"", linijeIspisa[3].toLowerCase().contains("free"));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the fifth line of the output should contain \"5.\"", linijeIspisa[4].contains("5."));
+		assertTrue("If the garage is instantiated with five parking spaces, and only the first one is occupied, the fifth line of the output should contain the word \"FREE\"", linijeIspisa[4].toLowerCase().contains("free"));
 	}
 }
