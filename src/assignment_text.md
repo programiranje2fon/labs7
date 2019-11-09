@@ -14,10 +14,10 @@ Create public class **TestGarage** in package **task1**. In the main method of t
 
 Create public class **ParkingSpace**, in package **task1**, with the following elements:
 
-1. Private attribute **free** as an indicator the occupancy status of the parking space; it has value TRUE if the parking space is free, otherwise its value is FALSE.
+1. Private attribute **free** as an indicator of the occupancy status of the parking space; it has value TRUE if the parking space is free, otherwise its value is FALSE.
 2. Private attribute **vehicle**, an instance of the **Vehicle** class, that represents the vehicle parked at that space (if the space is occupied).
 3. Public get and set methods for these two attributes.
-4. Redefined public method **toString** of the Object class. The method returns a string with data about the parking space: if the space is free, the method returns "FREE"; if the space is occupied, the method returns: "OCCUPIED, registration number: ####". 
+4. Redefined public method **toString** of the Object class. The method returns a string describing the parking space: if the space is free, the method returns "FREE"; if the space is occupied, the method returns: "OCCUPIED, registration number: ####". 
 
 Create public class **Garage**, in package **task1**, with the following elements:
 
@@ -33,7 +33,7 @@ Create public class **Garage**, in package **task1**, with the following element
 <br/>   
 5. Public method **anyFreeSpace** that checks if there is a free parking space; the method returns true if there is at least one free parking space, otherwise it returns false.
 6. Public method **parkTheVehicle** for ‘parking’ a vehicle in the garage. The input parameter of this method is an object of the **Vehicle** class representing the vehicle to be parked. The vehicle should be ‘parked’ at the first free space. If there are no free spaces, an appropriate message ("THE GARAGE IS FULL") should be printed on the screen.
-7. Public method **unparkVehicle** for removing a vehicle from the garage. The input parameter of the method is an object of the **Vehicle** class representing the vehicle to be unparked. If the vehicle is in the garage, it should be 'unparked', so that the parking space becomes free again. Removing a vehicle assumes that the parking space occupied by that vehicle is set free and the vehicle object is destroyed (set to NULL).
+7. Public method **unparkVehicle** for removing a vehicle from the garage. The input parameter of the method is an object of the **Vehicle** class representing the vehicle to be unparked. If the vehicle is in the garage, it should be removed, so that the parking space becomes free again. Removing a vehicle assumes that the parking space occupied by that vehicle is set free and the vehicle object is destroyed (set to NULL).
 
 In the existing **TestGarage** class, create one object of the **Garage** class with the capacity of 10 parking spaces and 'park' two vehicles in this garage. Print the data about the garage. Then, unpark the first vehicle, and again print the data about the garage. 
 
